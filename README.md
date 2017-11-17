@@ -42,3 +42,8 @@ geoserver:
   ports:
     - "8080:8080"
 ```
+
+## CAVEAT
+
+* If you include `geofence` community plugin without configuring the authorization backend, Geoserver will malfunction.
+
