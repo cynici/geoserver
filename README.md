@@ -42,3 +42,8 @@ geoserver:
   ports:
     - "8080:8080"
 ```
+
+## CAVEAT
+
+* If you include community plugin `geofence` and leave it unconfigured, Geoserver will malfunction
+

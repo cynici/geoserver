@@ -7,7 +7,8 @@ ARG DOCKERIZE_VERSION=0.5.0
 
 ARG GEOSERVER_VERSION=2.12
 ARG GEOSERVER_PLUGINS="cas feature-pregeneralized imagemosaic-jdbc monitor mysql pyramid wps"
-ARG GEOSERVER_CPLUGINS="geofence"
+# Community plugins
+ARG GEOSERVER_CPLUGINS=""
 ARG GEOSERVER_BASE_URL="http://ares.boundlessgeo.com/geoserver/${GEOSERVER_VERSION}.x"
 
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
