@@ -45,5 +45,4 @@ geoserver:
 
 ## CAVEAT
 
-* If you include `geofence` community plugin without configuring the authorization backend, Geoserver will malfunction.
-
+* If you include community plugin `geofence` and leave it unconfigured, Geoserver will malfunction
