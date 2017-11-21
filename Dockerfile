@@ -26,9 +26,9 @@ ENV MINMEM 128m
 ENV MAXMEM 512m
 ENV PATH $PATH:/usr/bin:/usr/local/bin:$CATALINA_HOME/bin
 
-RUN buildDeps='curl unzip ca-certificates openssl g++ make' HOME='/root' \
+RUN buildDeps='unzip ca-certificates openssl g++ make' HOME='/root' \
  && set -x \
- && apk add --update $buildDeps \
+ && apk add --update curl $buildDeps \
  && wget -O- https://github.com/ncopa/su-exec/archive/v${SUEXEC_VERSION}.tar.gz | tar zxvf - \
  && cd su-exec-${SUEXEC_VERSION} \
  && make \
@@ -56,6 +56,11 @@ RUN buildDeps='curl unzip ca-certificates openssl g++ make' HOME='/root' \
 COPY local_policy.jar /usr/lib/jvm/default-jvm/jre/lib/security/
 COPY US_export_policy.jar /usr/lib/jvm/default-jvm/jre/lib/security/
 ADD setenv.sh $CATALINA_HOME/bin/
-ADD docker-entrypoint.sh /docker-entrypoint.sh
+COPY docker-entrypoint.sh /
+
+# Expose GeoServer's default port
+EXPOSE 8080
+
+HEALTHCHECK --start-period=2m --interval=10m --timeout=3s CMD curl -f "http://localhost:8080/geoserver/ows?service=wfs&version=1.1.0&request=GetCapabilities" || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
