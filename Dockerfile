@@ -61,6 +61,6 @@ COPY docker-entrypoint.sh /
 # Expose GeoServer's default port
 EXPOSE 8080
 
-HEALTHCHECK --start-period=2m --interval=10m --timeout=3s CMD curl -f "http://localhost:8080/geoserver/ows?service=wfs&version=1.1.0&request=GetCapabilities" || exit 1
+HEALTHCHECK --start-period=2m --interval=5m --timeout=5s CMD curl -f "http://localhost:8080/geoserver/ows?service=wfs&version=1.1.0&request=GetCapabilities" || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
