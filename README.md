@@ -33,7 +33,7 @@ geoserver:
   image: cheewai/tomcat
   environment:
     - TOMCAT_UID=1001
-    - MAXMEM=2048m
+    - MAXMEM=2g
     - GEOSERVER_DATA_DIR=/var/geoserver
     - GEOSERVER_LOG_LOCATION=/logs/geoserver.log
   volumes:
@@ -41,6 +41,27 @@ geoserver:
     - ./logs:/logs
   ports:
     - "8080:8080"
+```
+
+### Recommended Resource Limits
+
+When Geoserver starts up, its CPU and RAM usage spikes. If you don't provide enough, it will take a long time to be ready, if at all.
+
+Using docker-compose.yml version 3 for `docker stack deploy`:
+
+```
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 3g
+```
+
+Using docker-compose.yml version 2.2 for `docker-compose`:
+
+``` 
+    cpus: 4
+    mem_limit: 3g
 ```
 
 ## CAVEAT
