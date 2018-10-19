@@ -47,7 +47,7 @@ RUN buildDeps='unzip ca-certificates openssl g++ make' HOME='/root' \
  && for _p in $GEOSERVER_PLUGINS ; do wget -c "${GEOSERVER_BASE_URL}/ext-latest/geoserver-${GEOSERVER_VERSION}-SNAPSHOT-${_p}-plugin.zip" -O plugins/${_p}.zip; done \
  && unzip geoserver.zip geoserver.war \
  && unzip geoserver.war -d $CATALINA_HOME/webapps/geoserver \
- && find plugins -type f -name "*.zip" | xargs -i unzip {} -d $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ \
+ && find plugins -type f -name "*.zip" | xargs -i unzip -o {} -d $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ \
  && cd / \
  && rm -rf $CATALINA_HOME/webapps/geoserver/data \
  && rm -rf /tmp/geoserver \
