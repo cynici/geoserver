@@ -1,15 +1,15 @@
 FROM frolvlad/alpine-oraclejdk8:latest
 LABEL maintainer "Cheewai Lai <clai@csir.co.za>"
 
-ARG TOMCAT_VERSION=7.0.82
+ARG TOMCAT_VERSION=7.0.92
 ARG SUEXEC_VERSION=0.2
-ARG DOCKERIZE_VERSION=0.5.0
+ARG DOCKERIZE_VERSION=0.6.1
 
-ARG GEOSERVER_VERSION=2.12
+ARG GEOSERVER_VERSION=2.14
 ARG GEOSERVER_PLUGINS="cas feature-pregeneralized imagemosaic-jdbc monitor mysql pyramid wps"
 # Community plugins
 ARG GEOSERVER_CPLUGINS=""
-ARG GEOSERVER_BASE_URL="http://ares.boundlessgeo.com/geoserver/${GEOSERVER_VERSION}.x"
+ARG GEOSERVER_BASE_URL="http://build.geoserver.org/geoserver/${GEOSERVER_VERSION}.x"
 
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
 # SET CATALINE_HOME and PATH
