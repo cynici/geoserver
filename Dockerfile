@@ -1,15 +1,15 @@
 FROM frolvlad/alpine-oraclejdk8:latest
 LABEL maintainer "Cheewai Lai <clai@csir.co.za>"
 
-ARG TOMCAT_VERSION=7.0.82
+ARG TOMCAT_VERSION=8.5.37
 ARG SUEXEC_VERSION=0.2
-ARG DOCKERIZE_VERSION=0.5.0
+ARG DOCKERIZE_VERSION=0.6.1
 
-ARG GEOSERVER_VERSION=2.12
+ARG GEOSERVER_VERSION=2.14
 ARG GEOSERVER_PLUGINS="cas feature-pregeneralized imagemosaic-jdbc monitor mysql pyramid wps"
 # Community plugins
 ARG GEOSERVER_CPLUGINS=""
-ARG GEOSERVER_BASE_URL="http://ares.boundlessgeo.com/geoserver/${GEOSERVER_VERSION}.x"
+ARG GEOSERVER_BASE_URL="http://build.geoserver.org/geoserver/${GEOSERVER_VERSION}.x"
 
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm
 # SET CATALINE_HOME and PATH
@@ -36,7 +36,7 @@ RUN buildDeps='unzip ca-certificates openssl g++ make' HOME='/root' \
  && cd .. && rm -rf su-exec-${SUEXEC_VERSION} \
  && chmod +x /usr/bin/su-exec \
  && curl -fsSL "https://github.com/jwilder/dockerize/releases/download/v${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-v${DOCKERIZE_VERSION}.tar.gz" | tar -C /usr/bin -xzvf - \
- && curl --silent --location --retry 3 --cacert /etc/ssl/certs/ca-certificates.crt "https://archive.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz" \
+ && curl --silent --location --retry 3 --cacert /etc/ssl/certs/ca-certificates.crt "https://archive.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz" \
     | gunzip \
     | tar x -C /usr/ \
  && mv /usr/apache-tomcat* /usr/tomcat \
